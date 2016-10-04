@@ -1,3 +1,4 @@
+import formatTime from 'minutes-seconds-milliseconds';
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -19,7 +20,7 @@ let StopWatch = React.createClass ({
         <View style={ [styles.header, this.border('yellow')] }>
           <View style={ [this.border('red'), styles.timerWrapper] }>
             <Text>
-              00:00.00
+              { formatTime(this.state.timeElapsed) }
             </Text>
           </View>
           <View style={ [this.border('green'), styles.buttonWrapper] }>
@@ -58,9 +59,11 @@ let StopWatch = React.createClass ({
     handleStartPress: function() {
       let startTime = new Date();
 
-      this.setState({
-        timeElapsed: new Date() - startTime
-      });
+      setInterval(() => {
+        this.setState({
+          timeElapsed: new Date() - startTime
+        });
+      }, 30);
     },
     border: function(color) {
       return {
