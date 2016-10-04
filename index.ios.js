@@ -17,18 +17,18 @@ let StopWatch = React.createClass ({
   render:  function() {
     return (
       <View style={ styles.container }>
-        <View style={ [styles.header, this.border('yellow')] }>
-          <View style={ [this.border('red'), styles.timerWrapper] }>
-            <Text>
+        <View style={ styles.header }>
+          <View style={ styles.timerWrapper }>
+            <Text style={ styles.timer }>
               { formatTime(this.state.timeElapsed) }
             </Text>
           </View>
-          <View style={ [this.border('green'), styles.buttonWrapper] }>
+          <View style={ styles.buttonWrapper }>
             { this.startStopButton() }
             { this.lapButton() }
           </View>
         </View>
-        <View style={ [styles.footer, this.border('blue')] }>
+        <View style={ [styles.footer] }>
           <Text>
             I am a list of Laps
           </Text>
@@ -40,6 +40,7 @@ let StopWatch = React.createClass ({
         <TouchableHighlight 
           underlayColor="gray"
           onPress={ this.handleStartPress }
+          style={ [styles.button, styles.startButton] }
           >
           <Text>
             Start
@@ -49,7 +50,7 @@ let StopWatch = React.createClass ({
     },
     lapButton: function() {
       return (
-        <View>
+        <View style={ styles.button }>
           <Text>
             Lap
           </Text>
@@ -64,12 +65,6 @@ let StopWatch = React.createClass ({
           timeElapsed: new Date() - startTime
         });
       }, 30);
-    },
-    border: function(color) {
-      return {
-        borderColor: color,
-        borderWidth: 4
-      }
     }
 })
 
@@ -94,6 +89,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center'
+  },
+  timer: {
+    fontSize: 60
+  },
+  button: {
+    borderWidth: 2,
+    height: 100,
+    width: 100,
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  startButton: {
+    borderColor: '#00CC00'
   }
 });
 
